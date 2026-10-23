@@ -16,11 +16,11 @@
 
         // Outside VS Code (Cursor, Windsurf, Insiders, ...) the extension prefixes state with
         // "bruno.<uriScheme>."; no prefix means VS Code. State can be forged via a crafted link,
-        // so script-capable and web schemes are blocked (javascript: would run on this origin).
-        var BLOCKED_SCHEMES = ['javascript', 'vbscript', 'data', 'blob', 'file', 'about', 'http', 'https', 'ftp', 'ws', 'wss'];
+        // so only known editor schemes are honoured; anything else falls back to vscode.
+        var ALLOWED_SCHEMES = ['vscode', 'vscode-insiders', 'cursor', 'windsurf'];
         var scheme = 'vscode';
         var match = /^bruno\.([a-z][a-z0-9+-]*)\./.exec(allParams.get('state') || '');
-        if (match && BLOCKED_SCHEMES.indexOf(match[1]) === -1) {
+        if (match && ALLOWED_SCHEMES.indexOf(match[1]) !== -1) {
           scheme = match[1];
         }
 
