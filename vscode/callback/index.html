@@ -29,7 +29,7 @@
         }
 
         const queryString = allParams.toString();
-        const url = scheme + '://bruno-api-client.bruno/oauth2/callback';
+        let url = scheme + '://bruno-api-client.bruno/oauth2/callback';
         url += queryString ? '?' + queryString : '';
         window.open(url);
       })();
